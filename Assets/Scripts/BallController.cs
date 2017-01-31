@@ -22,43 +22,22 @@ public class BallController : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		Debug.Log (other);
-		if(other.tag == "GoalZone")
-		{
-			if(transform.position.x < 0)
-			{
-				transform.position = paddle2.transform.position + new Vector3(-1f, 0, 0);
-				myRigidBody.velocity = new Vector2(-startForce, -startForce);
 
+	// Triggered when ball enters in the zone
+	void OnTriggerEnter2D(Collider2D other) {
+
+		if (other.tag == "GoalZone") {
+
+			// Ball enters in the area
+
+			if (transform.position.x < 0) {
+				// Ball enter in the GoalZone on the left reset the position of the ball next to the Paddle2 on the right
+				transform.position = paddle2.transform.position + new Vector3 (-1f, 0, 0);
+				myRigidBody.velocity = new Vector2 (-startForce, -startForce);
 			} else {
-				transform.position = paddle1.transform.position + new Vector3(1f, 0, 0);
-				myRigidBody.velocity = new Vector2(startForce, startForce);
-
+				transform.position = paddle1.transform.position + new Vector3 (1f, 0, 0);
+				myRigidBody.velocity = new Vector2 (startForce, startForce);
 			}
 		}
 	}
-
-	// Triggered when ball enters in the zone
-//	void OnTriggerEnter2D(Collider2D other) {
-//
-//		Debug.Log("OnTriggerEnter2D");
-//
-//		if (other.tag == "GoalZone") {
-//
-//			// Ball is in the area
-//			Debug.Log("Ball is in the area");
-//
-//			if (transform.position.x < 0) {
-//				// Ball enter in the GoalZone on the left reset the position of the ball next to the Paddle2 on the right
-//				transform.position = paddle2.transform.position + new Vector3 (-1f, 0, 0);
-//				myRigidBody.velocity = new Vector2 (-startForce, -startForce);
-//			} else {
-//
-//				transform.position = paddle1.transform.position + new Vector3 (-1f, 0, 0);
-//				myRigidBody.velocity = new Vector2 (startForce, startForce);
-//			}
-//		}
-//	}
 }

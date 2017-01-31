@@ -17,7 +17,7 @@ public class PaddleController : MonoBehaviour {
 	void Update () {
 
 		// Paddle movement
-		if (Input.GetKey (KeyCode.W)) {
+		if (Input.GetKey(KeyCode.W)) {
 			// Up
 			transform.position = new Vector3 (
 				transform.position.x, 
@@ -25,7 +25,7 @@ public class PaddleController : MonoBehaviour {
 				transform.position.z);
 
 			direction = 1;
-		} else if (Input.GetKey (KeyCode.S)) {
+		} else if (Input.GetKey(KeyCode.S)) {
 			// Down
 			transform.position = new Vector3 (
 				transform.position.x, 
@@ -41,9 +41,10 @@ public class PaddleController : MonoBehaviour {
 	// Ball no longer touching a paddle
 	// Used to make the ball speed up and add some velocity when the direction of the ball changes
 	// it adds some difficulty to the game
-	// x velocity will be faster and faster after the end of collision by * 1.1f - it's a slithly tweak
+	// x velocity will be faster and faster after the end of collision by * 1.1f
 	void OnCollisionExit2D(Collision2D other) {
-		other.rigidbody.velocity = new Vector2 (other.rigidbody.velocity.x * 1.1f, other.rigidbody.velocity.y + (direction * adjustSpeed));
-		//Debug.Log (other.rigidbody.velocity);
+		other.rigidbody.velocity = new Vector2 (
+			other.rigidbody.velocity.x * 1.1f, 
+			other.rigidbody.velocity.y + (direction * adjustSpeed));
 	}
 }
