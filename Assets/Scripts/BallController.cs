@@ -11,6 +11,8 @@ public class BallController : MonoBehaviour {
 	public GameObject paddle1;
 	public GameObject paddle2;
 
+	public GameManager gm;
+
 	// Use this for initialization
 	void Start () {
 		myRigidBody = GetComponent<Rigidbody2D> ();
@@ -34,9 +36,14 @@ public class BallController : MonoBehaviour {
 				// Ball enter in the GoalZone on the left reset the position of the ball next to the Paddle2 on the right
 				transform.position = paddle2.transform.position + new Vector3 (-1f, 0, 0);
 				myRigidBody.velocity = new Vector2 (-startForce, -startForce);
+
+				gm.UpdateScore (2);
+
 			} else {
 				transform.position = paddle1.transform.position + new Vector3 (1f, 0, 0);
 				myRigidBody.velocity = new Vector2 (startForce, startForce);
+
+				gm.UpdateScore (1);
 			}
 		}
 	}
