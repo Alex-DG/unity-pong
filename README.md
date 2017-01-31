@@ -1,3 +1,3 @@
-# unity-tennis-game
+# unity-pong
 
 Pong game with unity
