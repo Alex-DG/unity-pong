@@ -8,6 +8,9 @@ public class PaddleController : MonoBehaviour {
 	public float direction; // Paddle direction : 1 going up, -1 going down, 0 going anywhere
 	public float adjustSpeed;
 
+	public Transform upperLimit;
+	public Transform lowerLimit;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,6 +39,16 @@ public class PaddleController : MonoBehaviour {
 		} else {
 			direction = 0;
 		}
+
+		// Check the limit position of the paddle
+		if (transform.position.y > upperLimit.position.y) {
+			// Upper limit
+			transform.position = new Vector3 (transform.position.x, upperLimit.position.y, transform.position.z);
+		} else if (transform.position.y < lowerLimit.position.y) {
+			// Lower limit
+			transform.position = new Vector3 (transform.position.x, lowerLimit.position.y, transform.position.z);
+		}
+			
 	}
 
 	// Ball no longer touching a paddle
