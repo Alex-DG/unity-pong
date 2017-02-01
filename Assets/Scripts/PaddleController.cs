@@ -19,25 +19,45 @@ public class PaddleController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// Paddle movement
-		if (Input.GetKey(KeyCode.W)) {
-			// Up
-			transform.position = new Vector3 (
-				transform.position.x, 
-				transform.position.y + (speed * Time.deltaTime),
-				transform.position.z);
+		if (Application.platform == RuntimePlatform.Android) {
 
-			direction = 1;
-		} else if (Input.GetKey(KeyCode.S)) {
-			// Down
-			transform.position = new Vector3 (
-				transform.position.x, 
-				transform.position.y - (speed * Time.deltaTime),
-				transform.position.z);
+			int i = 0;
 
-			direction = -1;
+			while (i < Input.touchCount) {
+
+				if (Input.GetTouch (i).phase == TouchPhase.Moved) {
+					
+					if (Input.GetTouch (i).position.y > Screen.height / 2) {
+						moveUp ();
+						direction = 1;
+
+					} else if (Input.GetTouch (i).position.y < Screen.height / 2) {
+						moveDown();
+						direction = -1;
+
+					} else {
+						direction = 0;
+					}
+				}
+
+				++i;
+			}
+		
 		} else {
-			direction = 0;
+
+			// Paddle movement
+			if (Input.GetKey(KeyCode.W)) {
+				// Up
+				moveUp();
+				direction = 1;
+			} else if (Input.GetKey(KeyCode.S)) {
+				// Down
+				moveDown();
+				direction = -1;
+			} else {
+				direction = 0;
+			}
+
 		}
 
 		// Check the limit position of the paddle
@@ -49,6 +69,20 @@ public class PaddleController : MonoBehaviour {
 			transform.position = new Vector3 (transform.position.x, lowerLimit.position.y, transform.position.z);
 		}
 			
+	}
+
+	private void moveUp() {
+		transform.position = new Vector3 (
+			transform.position.x, 
+			transform.position.y + (speed * Time.deltaTime),
+			transform.position.z);
+	}
+
+	private void moveDown(){ 
+		transform.position = new Vector3 (
+			transform.position.x, 
+			transform.position.y - (speed * Time.deltaTime),
+			transform.position.z);
 	}
 
 	// Ball no longer touching a paddle

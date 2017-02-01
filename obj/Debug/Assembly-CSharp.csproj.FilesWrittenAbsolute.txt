@@ -19,3 +19,5 @@
 /Users/Alex/Documents/Projects/Unity/Tennis/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/Alex/Documents/Projects/Unity/Tennis/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/Alex/Documents/Projects/Unity/Tennis/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/Alex/Documents/Projects/Unity/Tennis/Temp/bin/Debug/UnityEngine.Advertisements.dll
+/Users/Alex/Documents/Projects/Unity/Tennis/Temp/bin/Debug/UnityEngine.Purchasing.dll
