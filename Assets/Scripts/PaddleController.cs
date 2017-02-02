@@ -11,6 +11,8 @@ public class PaddleController : MonoBehaviour {
 	public Transform upperLimit;
 	public Transform lowerLimit;
 
+	public bool isPlayerOne;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,6 +21,9 @@ public class PaddleController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		// Paddle movement
+
+		// Android
 		if (Application.platform == RuntimePlatform.Android) {
 
 			int i = 0;
@@ -26,13 +31,13 @@ public class PaddleController : MonoBehaviour {
 			while (i < Input.touchCount) {
 
 				if (Input.GetTouch (i).phase == TouchPhase.Moved) {
-					
+				
 					if (Input.GetTouch (i).position.y > Screen.height / 2) {
 						moveUp ();
 						direction = 1;
 
 					} else if (Input.GetTouch (i).position.y < Screen.height / 2) {
-						moveDown();
+						moveDown ();
 						direction = -1;
 
 					} else {
@@ -42,20 +47,39 @@ public class PaddleController : MonoBehaviour {
 
 				++i;
 			}
-		
+	
 		} else {
 
-			// Paddle movement
-			if (Input.GetKey(KeyCode.W)) {
-				// Up
-				moveUp();
-				direction = 1;
-			} else if (Input.GetKey(KeyCode.S)) {
-				// Down
-				moveDown();
-				direction = -1;
+			// Desktop
+
+			if (isPlayerOne) {
+
+				if (Input.GetKey (KeyCode.W)) {
+					// Up
+					moveUp ();
+					direction = 1;
+				} else if (Input.GetKey (KeyCode.S)) {
+					// Down
+					moveDown ();
+					direction = -1;
+				} else {
+					direction = 0;
+				}
+
 			} else {
-				direction = 0;
+
+				if (Input.GetKey (KeyCode.O)) {
+					// Up
+					moveUp ();
+					direction = 1;
+				} else if (Input.GetKey (KeyCode.L)) {
+					// Down
+					moveDown ();
+					direction = -1;
+				} else {
+					direction = 0;
+				}
+
 			}
 
 		}
