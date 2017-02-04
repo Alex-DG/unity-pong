@@ -12,45 +12,26 @@ public class PaddleController : MonoBehaviour {
 	public Transform lowerLimit;
 
 	public bool isPlayerOne;
+	public bool isAI;
+
+	public BallController theBall;
 
 	// Use this for initialization
 	void Start () {
-		
+		theBall = FindObjectOfType<BallController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		// Paddle movement
+		if (isAI) {
 
-		// Android
-		if (Application.platform == RuntimePlatform.Android) {
+			transform.position = Vector3.MoveTowards (
+				transform.position, 
+				new Vector3 (transform.position.x, theBall.transform.position.y, transform.position.z), 
+				speed * Time.deltaTime); // speed level will change the difficulty - more the speed is high more the game will be hard
 
-			int i = 0;
-
-			while (i < Input.touchCount) {
-
-				if (Input.GetTouch (i).phase == TouchPhase.Moved) {
-				
-					if (Input.GetTouch (i).position.y > Screen.height / 2) {
-						moveUp ();
-						direction = 1;
-
-					} else if (Input.GetTouch (i).position.y < Screen.height / 2) {
-						moveDown ();
-						direction = -1;
-
-					} else {
-						direction = 0;
-					}
-				}
-
-				++i;
-			}
-	
 		} else {
-
-			// Desktop
 
 			if (isPlayerOne) {
 
@@ -81,8 +62,36 @@ public class PaddleController : MonoBehaviour {
 				}
 
 			}
-
+			
 		}
+
+		// Paddle movement
+
+//		// Android
+//		if (Application.platform == RuntimePlatform.Android) {
+//
+//			int i = 0;
+//
+//			while (i < Input.touchCount) {
+//
+//				if (Input.GetTouch (i).phase == TouchPhase.Moved) {
+//				
+//					if (Input.GetTouch (i).position.y > Screen.height / 2) {
+//						moveUp ();
+//						direction = 1;
+//
+//					} else if (Input.GetTouch (i).position.y < Screen.height / 2) {
+//						moveDown ();
+//						direction = -1;
+//
+//					} else {
+//						direction = 0;
+//					}
+//				}
+//
+//				++i;
+//			}
+	
 
 		// Check the limit position of the paddle
 		if (transform.position.y > upperLimit.position.y) {
